@@ -8,7 +8,6 @@ read -p "Copyright Year: " YEAR
 read -p "Copyright Holders: " COPYRIGHT_HOLDERS
 
 cat > MIT-LICENSE << EOF
-
 Copyright $YEAR $COPYRIGHT_HOLDERS
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files
