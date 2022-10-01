@@ -15,11 +15,11 @@ class BaseModel:
 
     def __str__(self):
            """ Overriding __str__ to print custom string """
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """ Updates public instance to current date/time """
-        self.updated_at = datetime.datetime.now()
+        self.updated_at = datetime.now()
 
     def to_dict(self):
           """ Returing a dictionary containing all keys/values of __dict__ """
