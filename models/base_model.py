@@ -33,10 +33,6 @@ class BaseModel:
             #
             #storage.new(self)
 
-    def __str__(self):
-        """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
-
     def save(self):
         """Updates the Public Instance Attribute: updated_at with the current datetime"""
         self.updated_at = datetime.now()
@@ -61,3 +57,7 @@ class BaseModel:
         hbnb_dict['updated_at'] = self.updated_at.isoformat()
         hbnb_dict['__class__'] = self.__class__.__name__
         return hbnb_dict
+
+    def __str__(self):
+        """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
