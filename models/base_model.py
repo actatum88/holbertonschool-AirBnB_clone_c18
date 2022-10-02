@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Class BaseModel: defines all common attributes/methods for other classes."""
-from models import storage
+from models.engine.file_storage import FileStorage
 from uuid import uuid4
 from datetime import datetime
 
