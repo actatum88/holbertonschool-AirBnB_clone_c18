@@ -14,6 +14,7 @@ class BaseModel:
         -otherwise
             -create id, created_at, and updated_at
     """
+
     def __init__(self, *args, **kwargs):
         """Instantiation of BaseModel"""
         if kwargs:
@@ -24,19 +25,19 @@ class BaseModel:
                     continue
                 setattr(self, k, v)
         else:
-            #string - assign with an uuid when an instance is created
+            # string - assign with an uuid when an instance is created
             self.id = str(uuid4())
-            #datetime - assign with the current datetime when an instance is created
+            # datetime - assign with the current datetime when an instance is created
             self.created_at = datetime.now()
-            #datetime - and it will be updated every time you change your object
+            # datetime - and it will be updated every time you change your object
             self.updated_at = datetime.now()
             #
-            #storage.new(self)
+            # storage.new(self)
 
     def save(self):
         """Updates the Public Instance Attribute: updated_at with the current datetime"""
         self.updated_at = datetime.now()
-        #storage.save()
+        # storage.save()
 
     def to_dict(self):
         """
@@ -52,12 +53,11 @@ class BaseModel:
         hbnb_dict = {}
         for key, value in self.__dict__.items():
             hbnb_dict[key] = value
-        hbnb_dict = dict(self.__dict__)
         hbnb_dict['create_at'] = self.created_at.isoformat()
         hbnb_dict['updated_at'] = self.updated_at.isoformat()
-        hbnb_dict['__class__'] = self.__class__.__name__
+        hbnb_dict['__class__'] = type(self).__name__
         return hbnb_dict
 
     def __str__(self):
         """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
