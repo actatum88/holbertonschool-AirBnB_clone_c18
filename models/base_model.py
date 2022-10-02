@@ -1,30 +1,62 @@
 #!/usr/bin/python3
-""" Base model Module """
-
-import datetime
-import uuid import uuid4
-timestamp = "%Y-%m-%dT%H:%M:%S.%f"
+"""Class BaseModel: defines all common attributes/methods for other classes."""
+from models import storage
+from uuid import uuid4
+from datetime import datetime
 
 
 class BaseModel:
-    """ Creates Base Model, define attributes for project. """
-    def __init__(self):
-        self.id = str(uuid4())
-        self.created_at = datetime.datetime.now()
-        self.updated_at = datetime.datetime.now()
+    """
+    Class BaseModel with Public Instance Attributes and Methods
+        -if kwargs is not empty:
+            -each key of this dictionary is an attribute name
+            -each value of this dictionary is the value of this attribute name
+        -otherwise
+            -create id, created_at, and updated_at
+    """
+    def __init__(self, *args, **kwargs):
+        """Instantiation of BaseModel"""
+        #format for datetime using strptime()
+        timestamp = "%Y-%m-%dT%H:%M:%S.%f"
+        if kwargs:
+            for k, v in kwargs.items():
+                if k == 'created_at' or k == 'updated_at':
+                    v = datetime.strptime(v, timestamp)
+                if k == '__class__':
+                    continue
+                setattr(self, k, v)
+        else:
+            #string - assign with an uuid when an instance is created
+            self.id = str(uuid4())
+            #datetime - assign with the current datetime when an instance is created
+            self.created_at = datetime.now()
+            #datetime - and it will be updated every time you change your object
+            self.updated_at = datetime.now()
+            #
+            storage.new(self)
 
     def __str__(self):
-           """ Overriding __str__ to print custom string """
-        return f"[{type(self).__name__}] ({self.id}) {self.__dict__}"
+        """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
+        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
-        """ Updates public instance to current date/time """
+        """Updates the Public Instance Attribute: updated_at with the current datetime"""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
-          """ Returing a dictionary containing all keys/values of __dict__ """
+          """
+          Returns a Dictionary Containing All Keys/Values of __dict__ of the Instance:
+            -by using self.__dict__, only instance attributes set will be returned
+            -a key __class__ must be added to this dictionary with the class name of the object
+            -created_at and updated_at must be converted to string object in ISO format:
+                -format: %Y-%m-%dT%H:%M:%S.%f (ex: 2017-06-14T22:31:03.285259)
+                -you can use isoformat() of datetime object
+            -this method will be the first piece of the serialization/deserialization process:
+                create a dictionary representation with “simple object type” of our BaseModel
+          """
         newDict = dict(self.__dict__)
-        newDict.update({"__class__": type(self).__name__})
-        newDict.update({"updated_at": self.updated_at.isoformat()})
-        newDict.update({"created_at": self.created_at.isoformat()})
+        newDict['create_at'] = self.created_at.isoformat()
+        newDict['updated_at'] = self.updated_at.isoformat()
+        newDict['__class__'] = self.__class__.__name__
         return newDict
