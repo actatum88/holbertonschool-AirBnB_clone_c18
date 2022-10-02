@@ -16,18 +16,22 @@ class BaseModel:
     """
     def __init__(self, *args, **kwargs):
         """Instantiation of BaseModel"""
-        timestamp = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for k, v in kwargs.items():
                 if k == 'created_at' or k == 'updated_at':
-                    v = datetime.strptime(v, timestamp)
+                    v = datetime.fromisoformat(v)
                 if k == '__class__':
                     continue
                 setattr(self, k, v)
         else:
+            #string - assign with an uuid when an instance is created
             self.id = str(uuid4())
+            #datetime - assign with the current datetime when an instance is created
             self.created_at = datetime.now()
+            #datetime - and it will be updated every time you change your object
             self.updated_at = datetime.now()
+            #
+            #storage.new(self)
 
     def __str__(self):
         """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
@@ -36,6 +40,7 @@ class BaseModel:
     def save(self):
         """Updates the Public Instance Attribute: updated_at with the current datetime"""
         self.updated_at = datetime.now()
+        #storage.save()
 
     def to_dict(self):
         """
