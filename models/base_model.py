@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Class BaseModel: defines all common attributes/methods for other classes."""
-from models.engine.file_storage import FileStorage
+import models
 from uuid import uuid4
 from datetime import datetime
 
@@ -53,6 +53,9 @@ class BaseModel:
           -this method will be the first piece of the serialization/deserialization process:
               create a dictionary representation with “simple object type” of our BaseModel
         """
+        hbnb_dict = {}
+        for key, value in self.__dict__.items():
+            hbnb_dict[key] = value
         hbnb_dict = dict(self.__dict__)
         hbnb_dict['create_at'] = self.created_at.isoformat()
         hbnb_dict['updated_at'] = self.updated_at.isoformat()
