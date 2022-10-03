@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """Class FileStorage: serializes instances to a JSON file and deserializes JSON file to instances."""
 import json
-import os
 
 
 class FileStorage:
@@ -30,34 +29,14 @@ class FileStorage:
         with open(self.__file_path, 'w') as f:
             json.dump(hbnb_dict, f)
 
-    def class_model(self):
-        """"""
-        from models.base_model import BaseModel
-        # from models.amenity import
-        # from models.city import
-        # from models.place import
-        # from models.review import
-        # from models.state import
-        # from models.user import
-
-        class_model = {
-            "BaseModel": BaseModel
-            # "Amenity":
-            # "City":
-            # "Place":
-            # "Review":
-            # "State":
-            # "User":
-        }
-        return class_model
-
     def reload(self):
         """deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
         otherwise, do nothing. If the file doesn’t exist, no exception should be raised)"""
-        class_model = self.class_model()
-        if os.path.exists(self.__file_path):
+        try:
             with open(self.__file_path, 'r') as f:
-                data = json.load(f)
-            for k, v in data.items():
-                class_name = v["__class__"]
-                self.__objects[k] = class_model[class_name](**v)
+                for o in json.load(f).values():
+                    name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(name)(**o))
+        except FileNotFoundError:
+            pass
