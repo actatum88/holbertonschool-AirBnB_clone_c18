@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Class BaseModel: defines all common attributes/methods for other classes."""
-import models
+from models import storage
 from uuid import uuid4
 from datetime import datetime
 
@@ -17,22 +17,25 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """Instantiation of BaseModel"""
-        if kwargs:
+        # string - assign with an uuid when an instance is created
+        self.id = str(uuid4())
+        # datetime - assign with the current datetime when an instance is created
+        self.created_at = datetime.now()
+        # datetime - and it will be updated every time you change your object
+        self.updated_at = datetime.now()
+        if len(kwargs) != 0:
             for k, v in kwargs.items():
                 if k == 'created_at' or k == 'updated_at':
-                    v = datetime.fromisoformat(v)
-                if k == '__class__':
-                    continue
-                setattr(self, k, v)
-        else:
-            # string - assign with an uuid when an instance is created
-            self.id = str(uuid4())
-            # datetime - assign with the current datetime when an instance is created
-            self.created_at = datetime.now()
-            # datetime - and it will be updated every time you change your object
-            self.updated_at = datetime.now()
-            #
-            # storage.new(self)
+                    self.__dict__[k] = datetime.fromisoformat(value)
+                else:
+                    self.__dict__[k] = v
+        #
+        #else:
+            #storage.new.(self)
+
+    def __str__(self):
+        """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """Updates the Public Instance Attribute: updated_at with the current datetime"""
@@ -57,7 +60,3 @@ class BaseModel:
         hbnb_dict['updated_at'] = self.updated_at.isoformat()
         hbnb_dict['__class__'] = type(self).__name__
         return hbnb_dict
-
-    def __str__(self):
-        """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
