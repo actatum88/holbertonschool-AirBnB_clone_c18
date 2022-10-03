@@ -15,6 +15,7 @@ class BaseModel:
             -create id, created_at, and updated_at
     """
 
+    # args is unused
     def __init__(self, *args, **kwargs):
         """Instantiation of BaseModel"""
         # string - assign with an uuid when an instance is created
@@ -30,8 +31,8 @@ class BaseModel:
                 if k != '__class__':
                     setattr(self, k, v)
         #
-        # else:
-            # storage.new.(self)
+        else:
+            storage.new(self)
 
     def __str__(self):
         """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
@@ -40,7 +41,7 @@ class BaseModel:
     def save(self):
         """Updates the Public Instance Attribute: updated_at with the current datetime"""
         self.updated_at = datetime.now()
-        # storage.save()
+        storage.save()
 
     def to_dict(self):
         """
