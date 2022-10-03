@@ -23,15 +23,15 @@ class BaseModel:
         self.created_at = datetime.now()
         # datetime - and it will be updated every time you change your object
         self.updated_at = datetime.now()
-        if len(kwargs) != 0:
+        if kwargs:
             for k, v in kwargs.items():
                 if k == 'created_at' or k == 'updated_at':
-                    self.__dict__[k] = datetime.fromisoformat(value)
-                else:
-                    self.__dict__[k] = v
+                    v = datetime.fromisoformat(v)
+                if k != '__class__':
+                    setattr(self, k, v)
         #
-        #else:
-            #storage.new.(self)
+        # else:
+            # storage.new.(self)
 
     def __str__(self):
         """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
@@ -53,10 +53,8 @@ class BaseModel:
           -this method will be the first piece of the serialization/deserialization process:
               create a dictionary representation with “simple object type” of our BaseModel
         """
-        hbnb_dict = {}
-        for key, value in self.__dict__.items():
-            hbnb_dict[key] = value
-        hbnb_dict['create_at'] = self.created_at.isoformat()
+        hbnb_dict = self.__dict__.copy()
+        hbnb_dict['created_at'] = self.created_at.isoformat()
         hbnb_dict['updated_at'] = self.updated_at.isoformat()
-        hbnb_dict['__class__'] = type(self).__name__
+        hbnb_dict['__class__'] = str(type(self).__name__)
         return hbnb_dict
