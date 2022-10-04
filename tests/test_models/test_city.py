@@ -1,15 +1,19 @@
 #!/usr/bin/python3
-"""This module tests the User class"""
+"""This module tests the City class"""
+
+
 import unittest
-from models.user import User
+from models.city import City
 
 
-class TestUser(unittest.TestCase):
-    """Testing the User Class"""
+class TestAmenity(unittest.TestCase):
+    """Testing the City Class"""
+
+    # Setting up using ClassMethod to check __init__
 
     def setUp(self):
         """setup before each method"""
-        self.a = User()
+        self.a = City()
 
     def tearDown(self):
         """cleanup after each method"""
@@ -19,11 +23,9 @@ class TestUser(unittest.TestCase):
 
     def testInstantation(self):
         """test initilization"""
-        self.assertEqual(self.a.email, "")
-        self.assertEqual(self.a.password, "")
-        self.assertEqual(self.a.first_name, "")
-        self.assertEqual(self.a.last_name, "")
+        self.assertEqual(self.a.name, "")
+        self.assertEqual(self.a.state_id, "")
         aDict = self.a.to_dict()
-        b = User(**aDict)
+        b = City(**aDict)
         self.assertEqual(b.to_dict(), aDict)
         self.assertFalse(self.a is b)
