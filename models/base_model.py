@@ -56,7 +56,7 @@ class BaseModel:
               create a dictionary representation with “simple object type” of our BaseModel
         """
         hbnb_dict = self.__dict__.copy()
-        hbnb_dict['created_at'] = self.created_at.isoformat()
+        hbnb_dict['created_at'] = str(self.created_at.isoformat())
         hbnb_dict['updated_at'] = self.updated_at.isoformat()
         hbnb_dict['__class__'] = str(type(self).__name__)
         return hbnb_dict
