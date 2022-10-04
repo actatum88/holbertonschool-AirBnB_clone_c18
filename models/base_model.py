@@ -15,7 +15,6 @@ class BaseModel:
             -create id, created_at, and updated_at
     """
 
-    # args is unused
     def __init__(self, *args, **kwargs):
         """Instantiation of BaseModel"""
         # string - assign with an uuid when an instance is created
