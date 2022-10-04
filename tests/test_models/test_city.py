@@ -6,7 +6,7 @@ import unittest
 from models.city import City
 
 
-class TestAmenity(unittest.TestCase):
+class TestCity(unittest.TestCase):
     """Testing the City Class"""
 
     # Setting up using ClassMethod to check __init__

@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""This module tests the State class"""
+"""This module tests the Place class"""
 
 
 import unittest
 from models.state import State
 
 
-class TestState(unittest.TestCase):
+class TestPlace(unittest.TestCase):
     """Testing the State Class"""
 
     def setUp(self):
@@ -23,6 +23,6 @@ class TestState(unittest.TestCase):
         """test initilization"""
         self.assertEqual(self.a.name, "")
         aDict = self.a.to_dict()
-        b = State(**aDict)
+        b = Place(**aDict)
         self.assertEqual(b.to_dict(), aDict)
         self.assertFalse(self.a is b)
