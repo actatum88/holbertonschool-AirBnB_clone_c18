@@ -23,12 +23,14 @@ class BaseModel:
         self.created_at = datetime.now()
         # datetime - and it will be updated every time you change your object
         self.updated_at = datetime.now()
-        if kwargs:
+        
+        """ if kwargs:
             for k, v in kwargs.items():
                 if k == 'created_at' or k == 'updated_at':
                     v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 if k != '__class__':
                     setattr(self, k, v)
+        """
         #
         else:
             storage.new(self)
