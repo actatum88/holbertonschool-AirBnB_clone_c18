@@ -2,6 +2,22 @@
 """Class FileStorage: serializes instances to a JSON file and deserializes JSON file to instances."""
 import json
 from models.base_model import BaseModel
+from models.user import Amenity
+from models.state import City
+from models.city import Place
+from models.place import Review
+from models.amenity import State
+from models.review import User
+
+class_name = {
+    "BaseModel": BaseModel,
+    "Amenity": Amenity,
+    "City": City,
+    "Place": Place,
+    "Review": Review,
+    "State": State,
+    "User": User
+    }
 
 
 class FileStorage:
