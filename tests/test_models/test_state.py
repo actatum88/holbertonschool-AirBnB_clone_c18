@@ -1,15 +1,17 @@
 #!/usr/bin/python3
-"""This module tests the User class"""
+"""This module tests the State class"""
+
+
 import unittest
-from models.user import User
+from models.state import State
 
 
-class TestUser(unittest.TestCase):
-    """Testing the User Class"""
+class TestState(unittest.TestCase):
+    """Testing the State Class"""
 
     def setUp(self):
         """setup before each method"""
-        self.a = User()
+        self.a = State()
 
     def tearDown(self):
         """cleanup after each method"""
