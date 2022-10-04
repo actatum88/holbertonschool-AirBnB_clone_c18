@@ -24,7 +24,7 @@ class BaseModel:
         # datetime - and it will be updated every time you change your object
         self.updated_at = datetime.now()
         
-        """ if kwargs:
+        if kwargs:
             for k, v in kwargs.items():
                 if k == 'created_at' or k == 'updated_at':
                     v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
@@ -33,7 +33,6 @@ class BaseModel:
 
         else:
             storage.new(self)
-        """
         
     def __str__(self):
         """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
