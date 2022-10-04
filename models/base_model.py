@@ -31,10 +31,10 @@ class BaseModel:
                 if k != '__class__':
                     setattr(self, k, v)
         """
-        #
+        """
         else:
             storage.new(self)
-
+        """
     def __str__(self):
         """Should Print: [<class name>] (<self.id>) <self.__dict__>"""
         return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
