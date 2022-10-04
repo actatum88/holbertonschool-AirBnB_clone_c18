@@ -1,3 +1,2 @@
 ## TESTS DIRECTORY  
-- `__init__.py`: initialization file for tests  
-- `test_models`: directory for test suite  
+- `test_console.py`: unittest for console.py  
