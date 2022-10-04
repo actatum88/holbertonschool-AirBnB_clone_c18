@@ -1,37 +1,32 @@
 #!/usr/bin/python3
-""" Console Module """
+"""contains the entry point of the command interpreter"""
 import cmd
-from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
-    """ Creates class for console commands. """
+    """
+    HBNBCommand Rules:
+        -you can assume arguments are always in the right order
+        -each arguments are separated by a space
+        -a string argument with a space must be between double quote
+        -the error management starts from the first argument to the last one
+    """
+
     prompt = '(hbnb) '
 
     def do_quit(self, arg):
-        """Quit command to exit the program."""
+        """quit command to exit the program"""
         return True
 
     def do_EOF(self, arg):
-        """Exits the command line at the end of file."""
+        """exits the command line at the end of file"""
+        print("")
         return True
 
     def emptyline(self):
-        """Empty line + Enter doesn't execute anything."""
+        """an empty line and ENTER shouldn’t execute anything"""
         pass
 
-    def do_create(self, args):
-        """Creates a new object and prints the object ID."""
-        arg = args.split()
-        if len(arg) < 1:
-            print("** Class name missing **")
-            return False
-        if len(arg) > 1:
-            print("** Too many Arguments **")
-            return False
-        if arg[0] !=  "BaseModel":
-            print("** Class name missing **")
-            return False
-        new_object = eval(str(args) + '()')
-        new_object.save()
-        print(new_object.id)
+
+if __name__ == '__main__':
+    HBNBCommand().cmdloop()
