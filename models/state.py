@@ -1,3 +1,11 @@
 #!/usr/bin/python3
-"""Class User that Inherits from BaseModel"""
+"""Class State that Inherits from BaseModel"""
 from models.base_model import BaseModel
+
+
+class State(BaseModel):
+    """
+    Public Class Attributes:
+        -name: string - empty string
+    """
+    name = ""
