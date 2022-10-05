@@ -23,7 +23,6 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-
     def emptyline(self):
         """an empty line and ENTER shouldn’t execute anything"""
         pass
