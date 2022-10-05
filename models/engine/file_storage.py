@@ -1,11 +1,13 @@
 #!/usr/bin/python3
-"""Class FileStorage: serializes instances to a JSON file and deserializes JSON file to instances."""
+"""Class FileStorage: serializes instances to a JSON file
+    and deserializes JSON file to instances."""
 import json
 from os import path
 
 
 class FileStorage:
-    """Class FileStorage with Private Class Attributes and Public Instance Methods"""
+    """Class FileStorage with Private Class Attributes and
+        Public Instance Methods"""
 
     # string - path to the JSON file (ex: file.json)
     __file_path = "file.json"
@@ -27,8 +29,10 @@ class FileStorage:
                                 in self.__objects.items()}))
 
     def reload(self):
-        """deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ;
-        otherwise, do nothing. If the file doesn’t exist, no exception should be raised)"""
+        """deserializes the JSON file to __objects
+            (only if the JSON file (__file_path) exists;
+            otherwise, do nothing. If the file doesn’t exist,
+            no exception should be raised)"""
         from models.base_model import BaseModel
         from models.amenity import Amenity
         from models.city import City

@@ -30,7 +30,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertIn("id", base_model1.__dict__)
         self.assertIsInstance(base_model1.created_at, datetime)
         self.assertIsInstance(base_model1.updated_at, datetime)
-        self.assertEqual(base_model1_kwargs.id, "d30aaea6-89e5-4381-b772-046fb7b452c7")
+        self.assertEqual(base_model1_kwargs.id,
+                         "5b9de3e3-1c3e-47ee-8ed0-98bb95eaa2a9")
         self.assertIsInstance(base_model1_kwargs, BaseModel)
         self.assertIsNotNone(base_model1.created_at)
         self.assertIsNotNone(base_model1.updated_at)
@@ -44,7 +45,8 @@ class TestBaseModel(unittest.TestCase):
         """unittest"""
         base_model2 = BaseModel()
         base_model2_str = str(base_model2)
-        base_model2_format = "[BaseModel] ({}) {}".format(base_model2.id, base_model2.__dict__)
+        base_model2_format = "[BaseModel] ({}) {}".format(
+            base_model2.id, base_model2.__dict__)
         self.assertEqual(base_model2_str, base_model2_format)
 
     def test_dict(self):
@@ -75,8 +77,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(hbnb_dict["__class__"], "BaseModel")
         self.assertEqual(type(hbnb_dict["created_at"]), str)
         self.assertEqual(type(hbnb_dict["updated_at"]), str)
-        self.assertEqual(hbnb_dict["created_at"], base_model5.created_at.strftime(time_format))
-        self.assertEqual(hbnb_dict["updated_at"], base_model5.updated_at.strftime(time_format))
+        self.assertEqual(hbnb_dict["created_at"],
+                         base_model5.created_at.strftime(time_format))
+        self.assertEqual(hbnb_dict["updated_at"],
+                         base_model5.updated_at.strftime(time_format))
 
     def test_pep8(self):
         """unittest"""

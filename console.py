@@ -138,7 +138,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, model_type):
-        """prints all string representation of all instances based or not on the class name"""
+        """prints all string representation of all instances
+            based or not on the class name"""
         obj_list = []
         if model_type == "":
             for obj in storage.all().values():
@@ -154,7 +155,8 @@ class HBNBCommand(cmd.Cmd):
             print(obj_list)
 
     def do_update(self, model_info):
-        """updates an instance based on the class name and id by adding or updating attribute"""
+        """updates an instance based on the class name and
+            id by adding or updating attribute"""
         model_type = None
         model_id = None
         model_attr = None

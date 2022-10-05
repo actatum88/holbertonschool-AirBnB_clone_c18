@@ -46,8 +46,10 @@ class TestCity(unittest.TestCase):
         self.assertEqual(hbnb_dict["__class__"], "City")
         self.assertEqual(type(hbnb_dict["created_at"]), str)
         self.assertEqual(type(hbnb_dict["updated_at"]), str)
-        self.assertEqual(hbnb_dict["created_at"], city4.created_at.strftime(time_format))
-        self.assertEqual(hbnb_dict["updated_at"], city4.updated_at.strftime(time_format))
+        self.assertEqual(hbnb_dict["created_at"],
+                         city4.created_at.strftime(time_format))
+        self.assertEqual(hbnb_dict["updated_at"],
+                         city4.updated_at.strftime(time_format))
 
     def test_pep8(self):
         """unittest"""
