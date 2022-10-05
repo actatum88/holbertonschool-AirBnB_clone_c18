@@ -23,13 +23,6 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    def do_quit(self, arg):
-        """quit command to exit the program"""
-        exit()
-
-    def do_EOF(self, arg):
-        """exits the command line at the end of file"""
-        exit()
 
     def emptyline(self):
         """an empty line and ENTER shouldn’t execute anything"""
@@ -38,6 +31,14 @@ class HBNBCommand(cmd.Cmd):
     def can_exit(self):
         """support for do_quit and do_EOF"""
         return True
+
+    def do_quit(self, arg):
+        """quit command to exit the program"""
+        exit()
+
+    def do_EOF(self, arg):
+        """exits the command line at the end of file"""
+        exit()
 
     def do_create(self, model_type="None"):
         """creates a new instance of BaseModel, saves it (to the JSON file)
