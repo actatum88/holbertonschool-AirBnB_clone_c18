@@ -37,7 +37,7 @@ class FileStorage:
         from models.state import State
         from models.user import User
 
-        class_name = {
+        class_names = {
             "BaseModel": BaseModel,
             "User": User,
             "State": State,
@@ -54,5 +54,5 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 json_dict = json.load(f)
             for key, value in json_dict.items():
-                classes = class_name.get(key.split('.')[0])
+                classes = class_names.get(key.split('.')[0])
                 self.__objects[key] = classes(**value)
