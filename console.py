@@ -32,11 +32,11 @@ class HBNBCommand(cmd.Cmd):
         """support for do_quit and do_EOF"""
         return True
 
-    def do_quit(self, arg):
+    def do_quit(self, x):
         """quit command to exit the program"""
         exit()
 
-    def do_EOF(self, arg):
+    def do_EOF(self, x):
         """exits the command line at the end of file"""
         exit()
 
