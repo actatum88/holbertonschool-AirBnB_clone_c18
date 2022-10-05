@@ -13,12 +13,11 @@ from models.user import User
 class FileStorage:
     """Class FileStorage with Private Class Attributes and Public Instance Methods"""
 
-    def __init__(self):
-        """Instantiation of FileStorage"""
-        # string - path to the JSON file (ex: file.json)
-        self.__file_path = "file.json"
-        # dictionary - empty but will store all objects by <class name>.id
-        self.__objects = {}
+    """Instantiation of FileStorage"""
+    # string - path to the JSON file (ex: file.json)
+    __file_path = "file.json"
+    # dictionary - empty but will store all objects by <class name>.id
+    __objects = {}
 
     def all(self):
         """returns the dictionary __objects"""
