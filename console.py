@@ -12,6 +12,7 @@ from models.state import State
 from models.user import User
 
 
+# entry point of the command
 class HBNBCommand(cmd.Cmd):
     """
     HBNBCommand Rules:
@@ -21,6 +22,7 @@ class HBNBCommand(cmd.Cmd):
         -the error management starts from the first argument to the last one
     """
 
+    # a custom prompt: (hbnb)
     prompt = '(hbnb) '
 
     def emptyline(self):
@@ -192,5 +194,6 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
 
+# code should not be executed when imported
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
