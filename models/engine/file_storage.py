@@ -41,6 +41,7 @@ class FileStorage:
         from models.state import State
         from models.user import User
 
+        # manage serialization and deserialization of all classes
         class_names = {
             "BaseModel": BaseModel,
             "User": User,
@@ -50,10 +51,13 @@ class FileStorage:
             "Place": Place,
             "Review": Review
         }
+        # if the file doesn’t exist, no exception should be raised
         if not path.exists(self.__file_path):
             pass
+        # if the file doesn’t exist, no exception should be raised
         elif path.getsize(self.__file_path) == 0:
             pass
+        # deserializes the JSON file to __objects
         else:
             with open(self.__file_path, 'r') as f:
                 json_dict = json.load(f)
