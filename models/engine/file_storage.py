@@ -41,6 +41,7 @@ class FileStorage:
         from models.state import State
         from models.user import User
 
+        # manage serialization and deserialization of all classes
         class_names = {
             "BaseModel": BaseModel,
             "User": User,

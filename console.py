@@ -44,8 +44,10 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, model_type="None"):
         """creates a new instance of BaseModel, saves it (to the JSON file)
             and prints the id"""
+        # check for class name missing
         if model_type == "" or None:
             print("** class name missing **")
+        # check for class name doesn’t exist
         elif model_type not in [
             "BaseModel",
             "City",
@@ -56,6 +58,7 @@ class HBNBCommand(cmd.Cmd):
             "Amenity"
         ]:
             print("** class doesn't exist **")
+        # check for class name and match to class
         else:
             if model_type == "BaseModel":
                 new_model = BaseModel()
@@ -72,7 +75,9 @@ class HBNBCommand(cmd.Cmd):
             elif model_type == "Review":
                 new_model = Review()
             print(new_model.id)
+            # new instance, call to the method new(self) on storage
             storage.new(new_model)
+            # call save(self) method of storage
             storage.save()
 
     def do_show(self, model_key=None):
@@ -86,13 +91,17 @@ class HBNBCommand(cmd.Cmd):
                 model_id = model_key.split(" ")[1]
             except IndexError:
                 pass
+        # check for class name missing
         if class_name is None:
             print("** class name missing **")
+        # check for class name doesn’t exist
         elif class_name not in ["BaseModel", "City", "State",
                                 "User", "Review", "Place", "Amenity"]:
             print("** class doesn't exist **")
+        # check for id missing
         elif model_id is None:
             print("** instance id missing **")
+        # prints the string representation of an instance
         else:
             model_key = class_name + "." + model_id
             key_exists = False
@@ -114,13 +123,17 @@ class HBNBCommand(cmd.Cmd):
                 model_id = model_key.split(" ")[1]
             except IndexError:
                 pass
+        # check for class name missing
         if class_name is None:
             print("** class name missing **")
+        # check for class name doesn’t exist
         elif class_name not in ["BaseModel", "City", "State",
                                 "User", "Review", "Place", "Amenity"]:
             print("** class doesn't exist **")
+        # check for id missing
         elif model_id is None:
             print("** instance id missing **")
+        # check for class name doesn’t exist for the id
         else:
             model_key = class_name + "." + model_id
             delkey = None
@@ -142,19 +155,26 @@ class HBNBCommand(cmd.Cmd):
         """prints all string representation of all instances
             based or not on the class name"""
         obj_list = []
+        # printed result must be a list of strings
         if model_type == "":
             for obj in storage.all().values():
                 obj_list.append(obj.__str__())
             print(obj_list)
+        # check for class name doesn’t exist
         elif model_type not in ["BaseModel", "City", "State",
                                 "User", "Review", "Place", "Amenity"]:
             print("** class doesn't exist **")
+        # printed result must be a list of strings
         else:
             for obj in storage.all().values():
                 if obj.__class__.__name__ == model_type:
                     obj_list.append(obj.__str__())
             print(obj_list)
 
+    # usage: update <class name> <id> <attribute name> "<attribute value>"
+    # assume the attribute name is valid
+    # assume nobody will try to update list of ids or datetime
+    # assume id, created_at and updated_at won’t be passed in the update command
     def do_update(self, model_info):
         """updates an instance based on the class name and
             id by adding or updating attribute"""
@@ -162,6 +182,7 @@ class HBNBCommand(cmd.Cmd):
         model_id = None
         model_attr = None
         model_val = None
+        # only one attribute can be updated at the time
         if model_info != "":
             try:
                 model_type = model_info.split(" ")[0]
@@ -173,14 +194,19 @@ class HBNBCommand(cmd.Cmd):
                     model_val += " " + model_info.split(" ")[4].strip('"')
             except IndexError:
                 pass
+        # check for class name missing
         if model_type is None:
             print("** class name missing **")
+        # check for id missing
         elif model_id is None:
             print("** instance id missing **")
+        # check for attribute name missing
         elif model_attr is None:
             print("** attribute name missing **")
+        # check for value for the attribute name doesn’t exist
         elif model_val is None:
             print("** value missing **")
+        # attribute value must be casted to the attribute type
         else:
             model_key = model_type + "." + model_id
             key_exists = False
@@ -190,6 +216,7 @@ class HBNBCommand(cmd.Cmd):
                     setattr(obj, model_attr, model_val)
                     key_exists = True
                     break
+            # check for class name doesn’t exist for the id
             if key_exists is not True:
                 print("** no instance found **")
 
