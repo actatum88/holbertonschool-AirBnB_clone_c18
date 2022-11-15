@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../holbertonschool-higher_level_programming"
+		},
+		{
+			"path": "../../holbertonschool-system_engineering-devops"
+		},
+		{
+			"name": "SSH FS - holberton_sandbox",
+			"uri": "ssh://holberton_sandbox/"
+		},
+		{
+			"path": "../../holbertonschool-AirBnB_clone_v2"
+		}
+	],
+	"settings": {}
+}
