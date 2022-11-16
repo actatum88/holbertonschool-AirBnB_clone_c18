@@ -6,6 +6,6 @@ header {
 }
 
 div.logo {
-	content: url(../images/logo.png);
+	content: url(./images/logo.png);
 	padding-left: 20px;
 }
